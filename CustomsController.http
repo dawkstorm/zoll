@@ -1,0 +1,6 @@
+@CustomsController_HostAddress = http://localhost:5080
+
+GET {{CustomsController_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
