@@ -2,10 +2,7 @@ namespace CustomsController.Services
 {
     public class CustomsService : ICustomsService
     {
-        public CustomsService()
-        {
-
-        }
+        public CustomsService(){ }
 
         public string Get()
         {
