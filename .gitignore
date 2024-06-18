@@ -1,2 +1,5 @@
-.bin
-.obj
+bin
+obj
+
+obj/Debug/net8.0/CustomsController.AssemblyInfo.cs
+obj/Debug/net8.0/CustomsController.AssemblyInfoInputs.cache
