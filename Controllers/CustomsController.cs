@@ -22,8 +22,8 @@ public class CustomsController : ControllerBase
 
 
     [HttpPost(Name = "PostCustoms")]
-    public async Task<bool> Post(string country)
+    public async Task<bool> Post(string shipper, string receiver)
     {
-        return _customService.Post(country);
+        return _customService.Post(shipper, receiver);
     }
 }

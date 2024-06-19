@@ -1,4 +1,5 @@
 using CustomsController.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICustomsService, CustomsService>();
 
+builder.Services.AddDbContext<CustomsContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("ZollConnections");
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

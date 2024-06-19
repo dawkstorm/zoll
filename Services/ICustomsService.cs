@@ -4,6 +4,6 @@ namespace CustomsController.Services
     {
         public string Get();
 
-        public bool Post(string country);
+        public bool Post(string shipper, string receiver);
     }
 }
