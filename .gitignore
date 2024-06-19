@@ -1,5 +1,12 @@
+bin*
+obj*
+idea*
 bin
 obj
+.idea
+*.DS_STORE
 
+*CustomsController.AssemblyInfo.cs
+*CustomsController.AssemblyInfoInputs.cache
 obj/Debug/net8.0/CustomsController.AssemblyInfo.cs
-obj/Debug/net8.0/CustomsController.AssemblyInfoInputs.cache
+obj/Debug/net8.0/CustomsController.AssemblyInfo.cs
