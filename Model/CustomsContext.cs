@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 public class CustomsContext : DbContext
 {
-    public DbSet<Country> Countries { get; set; }
+    public DbSet<Country> Countries => Set<Country>();
+
     public string DbPath { get; }
 
     public CustomsContext(DbContextOptions<CustomsContext> options) : base(options)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "countries.db");
+       
     }
 
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder){
-        modelBuilder.Entity<Country>().HasData();
+        base.OnModelCreating(modelBuilder);
     }
 }
 

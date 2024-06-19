@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomsController")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a425812cc63cffbd098f68d1f1f3b770c9f79251")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+605712fb1fa06fd7525b5651d5060eb5d5e379c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomsController")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomsController")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

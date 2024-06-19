@@ -13,11 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICustomsService, CustomsService>();
 
 builder.Services.AddDbContext<CustomsContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("ZollConnections");
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
+options.UseMySql(builder.Configuration.GetConnectionString("Database"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("Database"))), ServiceLifetime.Transient);
 
+﻿
 var app = builder.Build();
 
 
