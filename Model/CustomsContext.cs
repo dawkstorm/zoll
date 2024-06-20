@@ -17,11 +17,22 @@ public class CustomsContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new CountryConfiguration());
     }
 }
 
 public class Country
 {
-    public string A2Code; //e.g. "DE", "PL"
-    public bool isEU;
+    
+/// <summary>
+    /// AutoIncrement-ID of the config
+    /// </summary>
+    public int Id { get; set; }
+    public string A2Code {get; set;} //e.g. "DE", "PL"
+    public bool isEUCU {get; set;}
+
+    public Country(string A2Code, bool isEUCU){
+        this.A2Code = A2Code;
+        this.isEUCU = isEUCU;
+    }
 }

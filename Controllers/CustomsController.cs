@@ -1,5 +1,6 @@
 using CustomsController.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace CustomsController.Controllers;
 
@@ -14,16 +15,34 @@ public class CustomsController : ControllerBase
         _customService = customsService;
     }
 
-    [HttpGet(Name = "GetCustoms")]
-    public async Task<string> Get()
+    [HttpPost]
+    [Route("AddNewCountry")]
+    public async Task<Country> AddNewCountry(string A2Code, bool isEUCU)
     {
-        return _customService.Get();
+        return _customService.AddNewCountry(A2Code, isEUCU);
     }
 
-
-    [HttpPost(Name = "PostCustoms")]
-    public async Task<bool> Post(string shipper, string receiver)
+    [HttpDelete]
+    [Route("RemoveCountry")]
+    public async Task<Country> RemoveCountry(string A2Code)
     {
-        return _customService.Post(shipper, receiver);
+        return _customService.RemoveCountry(A2Code);
+    }
+    [HttpPut]
+    [Route("ChangeEUCU")]
+    public async Task<string> ChangeEUCU(string A2Code, bool val)
+    {
+        return _customService.ChangeEUCU(A2Code, val);
+    }
+    [HttpGet]
+    [Route("GetEUCU")]
+    public async Task<string> GetCountryEUCU(string A2Code)
+    {
+        return _customService.GetCountryEUCU(A2Code);
+    }
+    [HttpGet]
+    [Route("GetAllCountries")]
+    public async Task<List<Country>> GetAllCountries(){
+        return _customService.GetAllCountries();
     }
 }
