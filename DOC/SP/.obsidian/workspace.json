@@ -1,0 +1,201 @@
+{
+  "main": {
+    "id": "1e34d0714c42998d",
+    "type": "split",
+    "children": [
+      {
+        "id": "948764dfaf728d8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "991ede0149bc63d4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Was haben wir gemacht.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1a879213505ae78e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "preview",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "3e9e9391b085a033",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Zoll Regeln.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9aeefc99d7f83df9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2024-06-20.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "10bc9528faf6e90d",
+    "type": "split",
+    "children": [
+      {
+        "id": "7553ee517531d886",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "24282bfef8b0b5ec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "57bed0e65d89ca5b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "72e96c7349612461",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "774e129c1e3634df",
+    "type": "split",
+    "children": [
+      {
+        "id": "203959a4b276a4c6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3d35d0e9330c3367",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Was haben wir gemacht.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "246fbea0a80673c6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Was haben wir gemacht.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "828dfdf528efc242",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "097a419b6e5b4d91",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Was haben wir gemacht.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "24282bfef8b0b5ec",
+  "lastOpenFiles": [
+    "database.png",
+    "swagger.png",
+    "Was haben wir gemacht.md",
+    "vscode.png",
+    "Pasted image 20240620102901.png",
+    "image.png",
+    "eucu.png",
+    "Welcome.md",
+    "Untitled.md",
+    "Zoll Regeln.md",
+    "2024-06-20.md",
+    "Pasted image 20240620095154.png",
+    "Untitled"
+  ]
+}

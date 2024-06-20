@@ -5,7 +5,7 @@ namespace CustomsController.Services
 {
     public class CustomsService : ICustomsService
     {
-        private readonly CustomsContext _customContext; // using var db
+        private readonly CustomsContext _customContext; // database itself
 
         public CustomsService(CustomsContext customsContext){
 
@@ -70,8 +70,17 @@ namespace CustomsController.Services
             var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
             var country2_isEUCU = bool.Parse(GetCountryEUCU(country2code));
 
-            if(country1_isEUCU && country2_isEUCU) return false;
-            else return true;
+            try
+            {
+                if(country1_isEUCU && country2_isEUCU) return false;
+                else return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("country is not in the database");
+                throw;
+            }
+            
 
         }
     }
