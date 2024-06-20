@@ -2,10 +2,6 @@ namespace CustomsController.Services
 {
     public interface ICustomsService
     {
-        public string Get();
-
-        public bool Post(string shipper, string receiver);
-
         public Country AddNewCountry(string A2Code, bool isEUCU);
 
         public Country RemoveCountry(string A2Code);
@@ -15,5 +11,7 @@ namespace CustomsController.Services
         public string GetCountryEUCU(string A2Code);
 
         public List<Country> GetAllCountries();
+
+        public bool GetCustoms(string country1code, string country2code);
     }
 }

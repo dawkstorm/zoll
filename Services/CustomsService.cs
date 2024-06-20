@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomsController.Services
@@ -12,30 +13,6 @@ namespace CustomsController.Services
         }
 
         public CustomsService(){ }
-
-        public string Get()
-        {
-            _customContext.SaveChanges();
-            return "DE";
-        }
-
-        public bool Post(string shipper, string receiver)
-        {
-            var _shipper = _customContext.Countries.Find(shipper);
-            var _receiver = _customContext.Countries.Find(receiver);
-
-
-            if(_shipper.isEUCU && _shipper.isEUCU){
-                return false;
-            }
-            if(_shipper.isEUCU && !_receiver.isEUCU){
-                return true;
-            }
-            if(!_shipper.isEUCU && _receiver.isEUCU){
-                return true;
-            }
-            return false;
-        }
 
         public Country AddNewCountry(string A2Code, bool isEUCU)
         {
@@ -86,6 +63,16 @@ namespace CustomsController.Services
         public List<Country> GetAllCountries()
         {
             return _customContext.Countries.ToList();
+        }
+
+        public bool GetCustoms(string country1code, string country2code)
+        {
+            var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
+            var country2_isEUCU = bool.Parse(GetCountryEUCU(country2code));
+
+            if(country1_isEUCU && country2_isEUCU) return false;
+            else return true;
+
         }
     }
 }
