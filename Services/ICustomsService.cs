@@ -13,5 +13,7 @@ namespace CustomsController.Services
         public List<Country> GetAllCountries();
 
         public bool GetCustoms(string country1code, string country2code);
+
+        public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2);
     }
 }

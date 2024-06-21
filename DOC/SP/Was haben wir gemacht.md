@@ -5,7 +5,7 @@
 # Erste Woche
 - Fortschritt
 - Zollbestimmung
-- Lernte über Arbeit in E-Commerce Unternehmen
+- Agile und Scrum in E-Commerce Unternehmen
 
 ---
 

@@ -50,4 +50,9 @@ public class CustomsController : ControllerBase
     public async Task<bool> GetCustoms(string country1code, string country2code){
         return _customService.GetCustoms(country1code, country2code);
     }
+    [HttpGet]
+    [Route("GetCustomsBetweenDistricts")]
+    public async Task<bool> GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2){
+        return _customService.GetCustomsBetweenDistricts(c1, p1, c2, p2);
+    }
 }

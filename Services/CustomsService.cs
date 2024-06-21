@@ -7,18 +7,20 @@ namespace CustomsController.Services
     {
         private readonly CustomsContext _customContext; // database itself
 
-        public CustomsService(CustomsContext customsContext){
+        public CustomsService(CustomsContext customsContext)
+        {
 
             _customContext = customsContext;
         }
 
-        public CustomsService(){ }
+        public CustomsService() { }
 
         public Country AddNewCountry(string A2Code, bool isEUCU)
         {
             var country = new Country(A2Code, isEUCU);
             var code = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if(code == default){
+            if (code == default)
+            {
                 _customContext.Add(country);
             }
             _customContext.SaveChanges();
@@ -28,7 +30,8 @@ namespace CustomsController.Services
         public Country RemoveCountry(string A2Code)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if(country != default){
+            if (country != default)
+            {
                 _customContext.Remove(country);
             }
             _customContext.SaveChanges();
@@ -38,12 +41,14 @@ namespace CustomsController.Services
         public string ChangeEUCU(string A2Code, bool val)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if(country != default){
+            if (country != default)
+            {
                 country.isEUCU = val;
                 _customContext.SaveChanges();
                 return $"{val}";
             }
-            else{
+            else
+            {
                 return "country is not in the database";
             }
         }
@@ -51,13 +56,15 @@ namespace CustomsController.Services
         public string GetCountryEUCU(string A2Code)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if(country != default){
+            if (country != default)
+            {
                 return $"{country.isEUCU}";
             }
-            else{
+            else
+            {
                 return "country is not in the database";
             }
-            
+
         }
 
         public List<Country> GetAllCountries()
@@ -72,7 +79,7 @@ namespace CustomsController.Services
 
             try
             {
-                if(country1_isEUCU && country2_isEUCU) return false;
+                if (country1_isEUCU && country2_isEUCU) return false;
                 else return true;
             }
             catch (System.Exception)
@@ -80,8 +87,57 @@ namespace CustomsController.Services
                 Console.WriteLine("country is not in the database");
                 throw;
             }
+
+
+        }
+
+        //Check does specific postal code belong to EUCU
+        bool CheckForEUCU(string country, string pCode)
+        {
+            var exceptionsForCountry = _customContext.Postleizahlen.Where(c => c.Country == country).ToList();
+            var exceptionCodes = exceptionsForCountry.Select(b => b.Code);
+            
+            
+            // postleitzahl check
+            if (exceptionCodes.Contains(pCode))
+                return false; // customs ist true
+            else return true;
+
+
+            var exceptionCodeFrance = "976";
+            var LengthFrance = exceptionCodeFrance.Length;
+
+
+
+
+
             
 
+
+
+
+            // region //use foreach
+            /*
+            if (exceptionCodes.Contains(pCode.Substring(0, 2)))
+            {
+                if (exceptionsForCountry.FirstOrDefault(e => e.Type == "region") != default)
+                { //if type is region
+                    if (country == "FR")
+                    {
+                        if (exceptionCodes.Contains(    () return false;
+                        else return true;
+                    }
+                    else return false;
+                }
+                else return true;
+            }
+            else return true;
+            */   
+        }
+
+        public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
+        {
+            return !(CheckForEUCU(c1, p1) && CheckForEUCU(c2, p2));
         }
     }
 }

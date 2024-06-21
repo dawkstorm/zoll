@@ -23,24 +23,16 @@
             "id": "1a879213505ae78e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
-                "mode": "preview",
-                "source": true
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
             "id": "3e9e9391b085a033",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Zoll Regeln.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -49,13 +41,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2024-06-20.md",
+                "file": "Was haben wir gemacht.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
