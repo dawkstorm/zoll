@@ -97,12 +97,10 @@ namespace CustomsController.Services
                 Console.WriteLine("country is not in the database");
                 throw;
             }
-
-
         }
 
         //Check does specific postal code belong to EUCU
-        bool CheckForEUCU(string country, string pCode)
+        private bool CheckForEUCU(string country, string pCode)
         {
             var exceptionsForCountry = _customContext.Postleizahlen.Where(c => c.Country == country);
             var exceptionCodes = exceptionsForCountry.Select(b => b.Code);
@@ -111,8 +109,9 @@ namespace CustomsController.Services
             // postleitzahl check
             if (exceptionCodes.Contains(pCode))
                 return false; // customs ist true
-            else {
-                
+            else
+            {
+                //region check
                 return true;
             }
 

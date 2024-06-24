@@ -11,7 +11,7 @@ namespace CustomsController.Controllers;
 public class CustomsController : ControllerBase
 {
     private readonly ICustomsService _customService;
-    
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -32,7 +32,8 @@ public class CustomsController : ControllerBase
     public async Task<IActionResult> AddNewCountry(string A2Code, bool isEUCU)
     {
         var country = _customService.AddNewCountry(A2Code, isEUCU);
-        if(country == default){
+        if (country == default)
+        {
             return Ok("Country is already in the database");
         }
         return Ok(country);
@@ -47,7 +48,8 @@ public class CustomsController : ControllerBase
     public async Task<IActionResult> RemoveCountry(string A2Code)
     {
         var country = _customService.RemoveCountry(A2Code);
-        if(country == null){
+        if (country == null)
+        {
             return NotFound("Country wasn't found in the list");
         }
         return Ok(country);
@@ -96,7 +98,7 @@ public class CustomsController : ControllerBase
     {
         return _customService.GetCustoms(country1code, country2code);
     }
-    
+
     /// <summary>
     /// Check whether there are customs between countries and postal codes
     /// </summary>

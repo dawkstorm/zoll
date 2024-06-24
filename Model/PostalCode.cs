@@ -3,25 +3,6 @@
 /// </summary>
 public class PostalCode
 {
-    /// <summary>
-    /// AutoIncrement-ID of the config
-    /// </summary>
-    public int Id { get; set; }
-    
-    /// <summary>
-    /// Country's A2 isocode
-    /// </summary>
-    public string Country { get; set; } //e.g. "DE", "PL"
-
-    /// <summary>
-    /// Postal code 
-    /// </summary>
-    public string Code { get; set; }
-    
-    /// <summary>
-    /// Type of the postal code: region or postal code
-    /// </summary>
-    public string Type { get; set; }
 
     /// <summary>
     /// Costructor
@@ -35,4 +16,26 @@ public class PostalCode
         this.Code = Code;
         this.Type = Type;
     }
+
+    /// <summary>
+    /// AutoIncrement-ID of the config
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
+    /// Country's A2 isocode
+    /// </summary>
+    public string Country { get; set; } //e.g. "DE", "PL"
+
+    /// <summary>
+    /// Postal code 
+    /// </summary>
+    public string Code { get; set; }
+
+    /// <summary>
+    /// Type of the postal code: region or postal code
+    /// </summary>
+    public string Type { get; set; }
+
+
 }
