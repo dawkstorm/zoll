@@ -111,20 +111,10 @@ namespace CustomsController.Services
             // postleitzahl check
             if (exceptionCodes.Contains(pCode))
                 return false; // customs ist true
-            else return true;
-
-
-            var exceptionCodeFrance = "976";
-            var LengthFrance = exceptionCodeFrance.Length;
-
-
-
-
-
-
-
-
-
+            else {
+                
+                return true;
+            }
 
             // region //use foreach
             /*

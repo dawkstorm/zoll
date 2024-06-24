@@ -74,6 +74,7 @@ public class CustomsController : ControllerBase
     {
         return _customService.GetCountryEUCU(A2Code);
     }
+
     /// <summary>
     /// Returns all countries
     /// </summary>
@@ -83,6 +84,7 @@ public class CustomsController : ControllerBase
     {
         return _customService.GetAllCountries();
     }
+
     /// <summary>
     /// Check whether there are customs control between 2 countries or not
     /// </summary>
@@ -94,6 +96,7 @@ public class CustomsController : ControllerBase
     {
         return _customService.GetCustoms(country1code, country2code);
     }
+    
     /// <summary>
     /// Check whether there are customs between countries and postal codes
     /// </summary>
