@@ -1,21 +1,17 @@
 using CustomsController.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace CustomsController.Controllers;
 
-
 /// <summary>
-/// Controller für Zoll
+/// Controller for Customs
 /// </summary>
 [ApiController]
 [Route("[controller]")]
-[Authorize]
 public class CustomsController : ControllerBase
 {
-
     private readonly ICustomsService _customService;
+    
     /// <summary>
     /// Constructor
     /// </summary>
@@ -32,40 +28,48 @@ public class CustomsController : ControllerBase
     /// <param name="isEUCU">Is country a part of the EUCU</param>
     [HttpPost]
     [Route("add-new-country")]
-    [AllowAnonymous]
-    public async Task<Country> AddNewCountry(string A2Code, bool isEUCU)
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> AddNewCountry(string A2Code, bool isEUCU)
     {
-        return _customService.AddNewCountry(A2Code, isEUCU);
+        var country = _customService.AddNewCountry(A2Code, isEUCU);
+        if(country == default){
+            return Ok("Country is already in the database");
+        }
+        return Ok(country);
     }
+
     /// <summary>
     /// Remove country from database
     /// </summary>
     /// <param name="A2Code">Country's A2 Isocode</param>
     [HttpDelete]
     [Route("remove-country")]
-    [AllowAnonymous]
-    public async Task<Country> RemoveCountry(string A2Code)
+    public async Task<IActionResult> RemoveCountry(string A2Code)
     {
-        return _customService.RemoveCountry(A2Code);
+        var country = _customService.RemoveCountry(A2Code);
+        if(country == null){
+            return NotFound("Country wasn't found in the list");
+        }
+        return Ok(country);
     }
+
     /// <summary>
     /// Change boolean isEUCU
     /// </summary>
     /// <param name="A2Code">Country's A2 Isocode</param>
     [HttpPut]
     [Route("change-eucu")]
-    [AllowAnonymous]
     public async Task<string> ChangeEUCU(string A2Code, bool val)
     {
         return _customService.ChangeEUCU(A2Code, val);
     }
+
     /// <summary>
     /// Check whether country is in EUCU or not
     /// </summary>
     /// <param name="A2Code">Country's A2 Isocode</param>
     [HttpGet]
     [Route("get-eucu")]
-    [AllowAnonymous]
     public async Task<string> GetCountryEUCU(string A2Code)
     {
         return _customService.GetCountryEUCU(A2Code);
@@ -75,7 +79,6 @@ public class CustomsController : ControllerBase
     /// </summary>
     [HttpGet]
     [Route("get-all-countries")]
-    [AllowAnonymous]
     public async Task<List<Country>> GetAllCountries()
     {
         return _customService.GetAllCountries();
@@ -87,13 +90,12 @@ public class CustomsController : ControllerBase
     /// <param name="country2code">Second country's A2 Isocode</param>
     [HttpGet]
     [Route("get-customs")]
-    [AllowAnonymous]
     public async Task<bool> GetCustoms(string country1code, string country2code)
     {
         return _customService.GetCustoms(country1code, country2code);
     }
     /// <summary>
-    /// Check whether there are customs between countries and postalCodes
+    /// Check whether there are customs between countries and postal codes
     /// </summary>
     /// <param name="c1">First country's isocode</param>
     /// <param name="p1">First postalCode</param>
@@ -101,7 +103,6 @@ public class CustomsController : ControllerBase
     /// <param name="p2">Second postalCode</param>
     [HttpGet]
     [Route("get-customs-between-districts")]
-    [AllowAnonymous]
     public async Task<bool> GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
     {
         return _customService.GetCustomsBetweenDistricts(c1, p1, c2, p2);

@@ -1,5 +1,4 @@
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CustomsController.Services
 {
@@ -18,35 +17,40 @@ namespace CustomsController.Services
 
         public CustomsService() { }
 
+        /// <inheritdoc/>
         public Country AddNewCountry(string A2Code, bool isEUCU)
         {
             var country = new Country(A2Code, isEUCU);
             var code = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if (code == default)
+            if (code != default)
             {
-                _customContext.Add(country);
+                return default;
             }
+            _customContext.Add(country);
             _customContext.SaveChanges();
             return country;
         }
 
+        /// <inheritdoc/>
         public Country RemoveCountry(string A2Code)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
-            if (country != default)
+            if (country == default)
             {
-                _customContext.Remove(country);
+                return null;
             }
+            _customContext.Remove(country);
             _customContext.SaveChanges();
             return country;
         }
 
+        /// <inheritdoc/>
         public string ChangeEUCU(string A2Code, bool val)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
             if (country != default)
             {
-                country.isEUCU = val;
+                country.IsEUCU = val;
                 _customContext.SaveChanges();
                 return $"{val}";
             }
@@ -56,12 +60,13 @@ namespace CustomsController.Services
             }
         }
 
+        /// <inheritdoc/>
         public string GetCountryEUCU(string A2Code)
         {
             var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
             if (country != default)
             {
-                return $"{country.isEUCU}";
+                return $"{country.IsEUCU}";
             }
             else
             {
@@ -70,11 +75,13 @@ namespace CustomsController.Services
 
         }
 
+        /// <inheritdoc/>
         public List<Country> GetAllCountries()
         {
             return _customContext.Countries.ToList();
         }
 
+        /// <inheritdoc/>
         public bool GetCustoms(string country1code, string country2code)
         {
             var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
@@ -138,6 +145,7 @@ namespace CustomsController.Services
             */
         }
 
+        /// <inheritdoc/>
         public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
         {
             return !(CheckForEUCU(c1, p1) && CheckForEUCU(c2, p2));
