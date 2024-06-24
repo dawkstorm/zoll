@@ -20,7 +20,8 @@ public class CustomsController : ControllerBase
     /// Constructor
     /// </summary>
     /// <param name="customsService">Reference to Customs Service class</param>
-    public CustomsController(ICustomsService customsService){
+    public CustomsController(ICustomsService customsService)
+    {
         _customService = customsService;
     }
 
@@ -75,7 +76,8 @@ public class CustomsController : ControllerBase
     [HttpGet]
     [Route("get-all-countries")]
     [AllowAnonymous]
-    public async Task<List<Country>> GetAllCountries(){
+    public async Task<List<Country>> GetAllCountries()
+    {
         return _customService.GetAllCountries();
     }
     /// <summary>
@@ -86,7 +88,8 @@ public class CustomsController : ControllerBase
     [HttpGet]
     [Route("get-customs")]
     [AllowAnonymous]
-    public async Task<bool> GetCustoms(string country1code, string country2code){
+    public async Task<bool> GetCustoms(string country1code, string country2code)
+    {
         return _customService.GetCustoms(country1code, country2code);
     }
     /// <summary>
@@ -99,7 +102,8 @@ public class CustomsController : ControllerBase
     [HttpGet]
     [Route("get-customs-between-districts")]
     [AllowAnonymous]
-    public async Task<bool> GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2){
+    public async Task<bool> GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
+    {
         return _customService.GetCustomsBetweenDistricts(c1, p1, c2, p2);
     }
 }

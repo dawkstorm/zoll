@@ -99,8 +99,8 @@ namespace CustomsController.Services
         {
             var exceptionsForCountry = _customContext.Postleizahlen.Where(c => c.Country == country);
             var exceptionCodes = exceptionsForCountry.Select(b => b.Code);
-            
-            
+
+
             // postleitzahl check
             if (exceptionCodes.Contains(pCode))
                 return false; // customs ist true
@@ -114,7 +114,7 @@ namespace CustomsController.Services
 
 
 
-            
+
 
 
 
@@ -135,7 +135,7 @@ namespace CustomsController.Services
                 else return true;
             }
             else return true;
-            */   
+            */
         }
 
         public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
