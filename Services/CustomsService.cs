@@ -94,7 +94,7 @@ namespace CustomsController.Services
         //Check does specific postal code belong to EUCU
         bool CheckForEUCU(string country, string pCode)
         {
-            var exceptionsForCountry = _customContext.Postleizahlen.Where(c => c.Country == country).ToList();
+            var exceptionsForCountry = _customContext.Postleizahlen.Where(c => c.Country == country);
             var exceptionCodes = exceptionsForCountry.Select(b => b.Code);
             
             

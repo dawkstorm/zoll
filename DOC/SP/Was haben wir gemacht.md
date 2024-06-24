@@ -48,7 +48,20 @@ else
 	return true
 ```
 
-- Erweiterung mit Sonderfällen
+---
+## Erweiterung mit Sonderfällen
+- Databank
+- Postleizahl (27498)
+- Region (39 XXX)
+  ![[Pasted image 20240624085037.png]]
+---
+
+![[Pasted image 20240624094139.png | 250]] 
+
+---
+
+![[Pasted image 20240624094319.png | 250]]
+
 ---
 
 # Q&A
