@@ -3,13 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CustomsController.Services
 {
+    /// <inheritdoc/>
     public class CustomsService : ICustomsService
     {
         private readonly CustomsContext _customContext; // database itself
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="customsContext">for logic</param>
         public CustomsService(CustomsContext customsContext)
         {
-
             _customContext = customsContext;
         }
 
