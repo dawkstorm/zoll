@@ -17,7 +17,7 @@ public class CustomsContext : DbContext
     /// <summary>
     /// Postcodes database
     /// </summary>
-    public DbSet<PostalCode> Postleizahlen => Set<PostalCode>();
+    public DbSet<PostalCode> PostalCodes => Set<PostalCode>();
 
     /// <summary>
     /// Path to the database

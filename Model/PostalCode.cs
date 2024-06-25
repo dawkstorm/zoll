@@ -36,6 +36,4 @@ public class PostalCode
     /// Type of the postal code: region or postal code
     /// </summary>
     public string Type { get; set; }
-
-
 }

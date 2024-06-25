@@ -18,7 +18,7 @@ public class Country
     /// AutoIncrement-ID of the config
     /// </summary>
     public int Id { get; set; }
-    
+
     /// <summary>
     /// Country's A2 isocode
     /// </summary>

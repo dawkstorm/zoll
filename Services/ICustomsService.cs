@@ -17,13 +17,13 @@ namespace CustomsController.Services
         /// </summary>
         /// <param name="A2Code">Country's A2 isocode</param>
         public Country RemoveCountry(string A2Code);
-        
+
         /// <summary>
         /// Change boolean isEUCu
         /// </summary>
         /// <param name="A2Code">Country's A2 isocode</param>
         public string ChangeEUCU(string A2Code, bool val);
-        
+
         /// <summary>
         /// Check whether country is in EUCU or not
         /// </summary>
@@ -42,7 +42,7 @@ namespace CustomsController.Services
         /// <param name="country1code">Shipper country's isocode</param>
         /// <param name="country2code">Receiver country's isocode</param>
         /// <returns></returns>
-        public bool GetCustoms(string country1code, string country2code);
+        public bool? GetCustoms(string country1code, string country2code);
 
         /// <summary>
         /// Check whether there are customs between 2 postalCode
@@ -52,5 +52,11 @@ namespace CustomsController.Services
         /// <param name="c2">Receiver country</param>
         /// <param name="p2">Receiver postalCode</param>
         public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2);
+
+        /// <summary>
+        /// Get info about the country
+        /// </summary>
+        /// <param name="A2Code">Country's A2 Isocode</param>
+        public Country? GetCountry(string A2Code);
     }
 }
