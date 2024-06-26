@@ -28,4 +28,9 @@ public class Country
     /// Is it a member of EUCU
     /// </summary>
     public bool IsEUCU { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public ICollection<PostalCode> PostalCodes { get; set; }
 }

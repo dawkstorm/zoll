@@ -1,5 +1,7 @@
 using System.Runtime.Intrinsics.X86;
+using CustomsController.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace CustomsController.Services;
@@ -65,6 +67,17 @@ public class CustomsService : ICustomsService
     /// <inheritdoc/>
     public string GetCountryEUCU(string A2Code)
     {
+
+        var countrytest = _customContext.Countries
+            .FirstOrDefault(c => c.A2Code == A2Code);
+        var countrytest2 = _customContext.Countries
+            .Include(c => c.PostalCodes)
+            .FirstOrDefault(c => c.A2Code == A2Code);
+
+
+
+
+
         var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
         if (country != default)
         {
@@ -98,28 +111,41 @@ public class CustomsService : ICustomsService
         else return true;
     }
 
+    //Check if in one region
+    private bool CheckRegion(string country, string p1, string p2)
+    {
+        var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == country);
+        var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
+
+        foreach (var code in exceptionCodes)
+        {
+            if (p1.StartsWith(code) && p2.StartsWith(code))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Check does specific postal code belong to EUCU
     private bool CheckForEUCU(string country, string pCode)
     {
         if (!bool.Parse(GetCountryEUCU(country))) return false;
 
-        var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country == country);
+        var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == country);
         var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
-        var exceptionTypes = exceptionsForCountry.Select(b => b.Type).ToList();
 
         // postleitzahl check
         if (exceptionCodes.Contains(pCode))
             return false; // customs ist true
 
         //region check
-        for (int i = 0; i < exceptionCodes.Count; i++)
+        foreach (var exceptionForCountry in exceptionsForCountry)
         {
-            if (exceptionTypes.ToArray()[i] == "region"
-            && pCode.StartsWith(exceptionCodes[i]))
-            {
+            if (exceptionForCountry.Type == PostalCodeType.Region && pCode.StartsWith(exceptionForCountry.Code))
                 return false;
-            }
         }
+
         return true;
 
         // region //use foreach

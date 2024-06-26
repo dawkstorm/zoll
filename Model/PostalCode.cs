@@ -1,3 +1,6 @@
+using CustomsController.Model;
+
+
 /// <summary>
 /// Database model for postal codes
 /// </summary>
@@ -10,9 +13,8 @@ public class PostalCode
     /// <param name="Country">Country's A2 isocode</param>
     /// <param name="Code">Postal code</param>
     /// <param name="Type">Type of the postal code: region or postal code</param>
-    public PostalCode(string Country, string Code, string Type)
+    public PostalCode(string Code, PostalCodeType Type)
     {
-        this.Country = Country;
         this.Code = Code;
         this.Type = Type;
     }
@@ -23,11 +25,6 @@ public class PostalCode
     public int Id { get; set; }
 
     /// <summary>
-    /// Country's A2 isocode
-    /// </summary>
-    public string Country { get; set; } //e.g. "DE", "PL"
-
-    /// <summary>
     /// Postal code 
     /// </summary>
     public string Code { get; set; }
@@ -35,5 +32,14 @@ public class PostalCode
     /// <summary>
     /// Type of the postal code: region or postal code
     /// </summary>
-    public string Type { get; set; }
+    public PostalCodeType Type { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int CountryID { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public Country Country { get; set; }
 }
