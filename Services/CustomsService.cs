@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Intrinsics.X86;
 using CustomsController.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -97,18 +98,43 @@ public class CustomsService : ICustomsService
     }
 
     /// <inheritdoc/>
-    public bool? GetCustoms(string country1code, string country2code)
+    public CustomsResponse GetCustoms(string country1code, string country2code)
     {
-        var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
-        var country2_isEUCU = bool.Parse(GetCountryEUCU(country2code));
 
+        var country1_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country1code);
+        var country2_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country2code);
+
+        // var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
+        // var country2_isEUCU = bool.Parse(GetCountryEUCU(country2code));
+
+        var doesCountryExist = DoesCountryExist(country1code, country2code);
+        if (doesCountryExist != null)
+            return doesCountryExist;
+
+        var result2 = new CustomsResponse()
+        {
+            IfCustomsInEUCU = false,
+            Success = true
+        };
+        return result2;
+
+
+        // if (country1_isEUCU && country2_isEUCU) return false;
+        // else return true;
+    }
+
+    private CustomsResponse DoesCountryExist(string country1code, string country2code)
+    {
         if (GetCountry(country1code) == default || GetCountry(country2code) == default)
         {
-            return null;
+            var result = new CustomsResponse()
+            {
+                Message = "Country wasn't found in the list",
+                Success = false
+            };
+            return result;
         }
-
-        if (country1_isEUCU && country2_isEUCU) return false;
-        else return true;
+        else return null;
     }
 
     //Check if in one region
@@ -186,25 +212,49 @@ public class CustomsService : ICustomsService
     }
 
     /// <inheritdoc/>
-    public bool GetCustomsBetweenDistricts(string shipperC1, string shipperP1, string receiverC2, string receiverP2)
+    public CustomsResponse GetCustomsBetweenDistricts(string shipperC1, string shipperP1, string receiverC2, string receiverP2)
     {
+        var doesCountryExist = DoesCountryExist(shipperC1, receiverC2);
+        if (doesCountryExist != null)
+            return doesCountryExist;
+
         var result = CheckIfSameCountryAndSameZipcode(shipperC1, shipperP1, receiverC2, receiverP2);
         if (!result)
-            return result;
+            return new CustomsResponse()
+            {
+                IfCustomsInEUCU = result,
+                Success = true,
+            };
 
         var resultRegion = CheckIfTheSameRegion(shipperC1, shipperP1, receiverC2, receiverP2);
         if (resultRegion)
-            return !resultRegion;
+            return new CustomsResponse()
+            {
+                IfCustomsInEUCU = !resultRegion,
+                Success = true,
+            };
 
         var resultShipper = CheckIfEUCU(shipperC1, shipperP1);
         if (!resultShipper)
-            return !resultShipper;
+            return new CustomsResponse()
+            {
+                IfCustomsInEUCU = !resultShipper,
+                Success = true,
+            };
 
         var resultReceiver = CheckIfEUCU(receiverC2, receiverP2);
         if (!resultReceiver)
-            return !resultReceiver;
+            return new CustomsResponse()
+            {
+                IfCustomsInEUCU = !resultReceiver,
+                Success = true,
+            };
 
-        return false;
+        return new CustomsResponse()
+        {
+            IfCustomsInEUCU = false,
+            Success = true,
+        };
     }
 
     private bool CheckIfSameCountryAndSameZipcode(string c1, string p1, string c2, string p2)

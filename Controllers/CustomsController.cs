@@ -28,11 +28,10 @@ public class CustomsController : ControllerBase
     /// <param name="country2code">Second country's A2 Isocode</param>
     [HttpGet]
     [Route("get-customs-with-countries")]
-    public async Task<IActionResult> GetCustomsWithCountries(string country1code, string country2code)
+    public async Task<CustomsResponse> GetCustomsWithCountries(string country1code, string country2code)
     {
         var customs = _customService.GetCustoms(country1code, country2code);
-        if (customs == default) return NotFound("Country wasn't found in the list");
-        return Ok(customs);
+        return customs;
     }
 
     /// <summary>
@@ -44,7 +43,7 @@ public class CustomsController : ControllerBase
     /// <param name="p2">Second postalCode</param>
     [HttpGet]
     [Route("get-customs-with-zipcodes")]
-    public async Task<bool> GetCustomsWithZipcodes(string c1, string p1, string c2, string p2)
+    public async Task<CustomsResponse> GetCustomsWithZipcodes(string c1, string p1, string c2, string p2)
     {
         return _customService.GetCustomsBetweenDistricts(c1, p1, c2, p2);
     }
