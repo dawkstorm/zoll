@@ -112,39 +112,46 @@ public class CustomsService : ICustomsService
     }
 
     //Check if in one region
-    private bool CheckRegion(string country, string p1, string p2)
+    private bool CheckIfTheSameRegion(string c1, string p1, string c2, string p2)
     {
-        var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == country);
-        var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
-
-        foreach (var code in exceptionCodes)
+        if (c1 == c2)
         {
-            if (p1.StartsWith(code) && p2.StartsWith(code))
+            var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == c1);
+            var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
+
+            foreach (var code in exceptionCodes)
             {
-                return true;
+                if (p1.StartsWith(code) && p2.StartsWith(code))
+                {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     //Check does specific postal code belong to EUCU
-    private bool CheckForEUCU(string country, string pCode)
+    private bool CheckIfEUCU(string country, string pCode)
     {
-        if (!bool.Parse(GetCountryEUCU(country))) return false;
+        var countryCheck = CountryCheck(country);
+        if (!countryCheck)
+            return countryCheck;
+
 
         var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == country);
         var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
 
-        // postleitzahl check
-        if (exceptionCodes.Contains(pCode))
-            return false; // customs ist true
+        var zipcodeCheck = ZipcodeCheck(pCode, exceptionCodes);
+        if (!zipcodeCheck)
+            return zipcodeCheck;
 
         //region check
-        foreach (var exceptionForCountry in exceptionsForCountry)
-        {
-            if (exceptionForCountry.Type == PostalCodeType.Region && pCode.StartsWith(exceptionForCountry.Code))
-                return false;
-        }
+        var regionCheck = RegionCheck(pCode, exceptionsForCountry);
+        if (!regionCheck)
+            return regionCheck;
+
+        //city check
+        // var cityCheck = CityCheck();
 
         return true;
 
@@ -153,11 +160,57 @@ public class CustomsService : ICustomsService
 
     }
 
-    /// <inheritdoc/>
-    public bool GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2)
+    private bool RegionCheck(string pCode, IQueryable<PostalCode> exceptionsForCountry)
     {
-        if (c1 == c2 && p1 == p2) return false;
-        return !(CheckForEUCU(c1, p1) && CheckForEUCU(c2, p2));
+        foreach (var exceptionForCountry in exceptionsForCountry)
+        {
+            if (exceptionForCountry.Type == PostalCodeType.Region && pCode.StartsWith(exceptionForCountry.Code))
+                return false;
+        }
+        return true;
+    }
+
+    private bool ZipcodeCheck(string pCode, List<string> exceptionCodes)
+    {
+        // postleitzahl check
+        if (exceptionCodes.Contains(pCode))
+            return false; // customs ist true
+        return true;
+    }
+
+    private bool CountryCheck(string country)
+    {
+        if (!bool.Parse(GetCountryEUCU(country)))
+            return false;
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public bool GetCustomsBetweenDistricts(string shipperC1, string shipperP1, string receiverC2, string receiverP2)
+    {
+        var result = CheckIfSameCountryAndSameZipcode(shipperC1, shipperP1, receiverC2, receiverP2);
+        if (!result)
+            return result;
+
+        var resultRegion = CheckIfTheSameRegion(shipperC1, shipperP1, receiverC2, receiverP2);
+        if (resultRegion)
+            return !resultRegion;
+
+        var resultShipper = CheckIfEUCU(shipperC1, shipperP1);
+        if (!resultShipper)
+            return !resultShipper;
+
+        var resultReceiver = CheckIfEUCU(receiverC2, receiverP2);
+        if (!resultReceiver)
+            return !resultReceiver;
+
+        return false;
+    }
+
+    private bool CheckIfSameCountryAndSameZipcode(string c1, string p1, string c2, string p2)
+    {
+        if (c1 == c2 && p1 == p2) return false;  // EUCU customs is false
+        return true;
     }
 
     /// <inheritdoc/>
