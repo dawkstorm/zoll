@@ -51,7 +51,13 @@ namespace CustomsController.Services
         /// <param name="p1">Shipper postalCode</param>
         /// <param name="c2">Receiver country</param>
         /// <param name="p2">Receiver postalCode</param>
-        public CustomsResponse GetCustomsBetweenDistricts(string c1, string p1, string c2, string p2);
+        public CustomsResponse GetCustomsBetweenDistricts(
+            string shipperC1,
+            string shipperP1,
+            string receiverC2,
+            string receiverP2,
+            string city1 = "",
+            string city2 = "");
 
         /// <summary>
         /// Get info about the country

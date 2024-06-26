@@ -39,11 +39,12 @@ public class PostalCode
     public PostalCodeType Type { get; set; }
 
     /// <summary>
-    /// 
+    /// Country's ID
     /// </summary>
     public int CountryID { get; set; }
+
     /// <summary>
-    /// 
+    /// Which country does this postal code belong to
     /// </summary>
     public Country Country { get; set; }
 }

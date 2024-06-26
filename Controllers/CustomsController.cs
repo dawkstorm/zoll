@@ -45,12 +45,12 @@ public class CustomsController : ControllerBase
     [Route("get-customs-with-zipcodes")]
     public async Task<CustomsResponse> GetCustomsWithZipcodes(
         string country1,
-        string p1,
         string country2,
+        string p1,
         string p2,
         string city1 = "",
         string city2 = "")
     {
-        return _customService.GetCustomsBetweenDistricts(country1, p1, country2, p2);
+        return _customService.GetCustomsBetweenDistricts(country1, p1, country2, p2, city1, city2);
     }
 }

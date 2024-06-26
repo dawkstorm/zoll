@@ -157,33 +157,41 @@ public class CustomsService : ICustomsService
     }
 
     //Check does specific postal code belong to EUCU
-    private bool CheckIfEUCU(string country, string pCode)
+    private bool CheckIfEUCU(string country, string pCode, string city)
     {
         var countryCheck = CountryCheck(country);
         if (!countryCheck)
             return countryCheck;
 
-
         var exceptionsForCountry = _customContext.PostalCodes.Where(c => c.Country.A2Code == country);
-        var exceptionCodes = exceptionsForCountry.Select(b => b.Code).ToList();
 
-        var zipcodeCheck = ZipcodeCheck(pCode, exceptionCodes);
+        var zipcodeCheck = ZipcodeCheck(pCode, exceptionsForCountry);
         if (!zipcodeCheck)
             return zipcodeCheck;
 
-        //region check
         var regionCheck = RegionCheck(pCode, exceptionsForCountry);
         if (!regionCheck)
             return regionCheck;
 
-        //city check
-        // var cityCheck = CityCheck();
+        var cityCheck = CityCheck(pCode, city, exceptionsForCountry);
+        if (!cityCheck)
+            return cityCheck;
 
         return true;
+    }
 
-        // region //use foreach
-        // there's no customs within one postleitzahl
-
+    private bool CityCheck(string pCode, string city, IQueryable<PostalCode> exceptionsForCountry)
+    {
+        foreach (var exceptionForCountry in exceptionsForCountry)
+        {
+            if (exceptionForCountry.Type == PostalCodeType.City
+            && exceptionForCountry.Code == pCode
+            && exceptionForCountry.City == city)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private bool RegionCheck(string pCode, IQueryable<PostalCode> exceptionsForCountry)
@@ -196,11 +204,14 @@ public class CustomsService : ICustomsService
         return true;
     }
 
-    private bool ZipcodeCheck(string pCode, List<string> exceptionCodes)
+    private bool ZipcodeCheck(string pCode, IQueryable<PostalCode> exceptionsForCountry)
     {
         // postleitzahl check
-        if (exceptionCodes.Contains(pCode))
-            return false; // customs ist true
+        // if (exceptionCodes.Contains(pCode) )
+        //    return false; // customs ist true
+        foreach (var exceptionForCountry in exceptionsForCountry)
+            if (exceptionForCountry.Code == pCode && exceptionForCountry.Type == PostalCodeType.Zipcode)
+                return false;
         return true;
     }
 
@@ -212,7 +223,13 @@ public class CustomsService : ICustomsService
     }
 
     /// <inheritdoc/>
-    public CustomsResponse GetCustomsBetweenDistricts(string shipperC1, string shipperP1, string receiverC2, string receiverP2)
+    public CustomsResponse GetCustomsBetweenDistricts(
+    string shipperC1,
+    string shipperP1,
+    string receiverC2,
+    string receiverP2,
+    string shipperCity1,
+    string receiverCity2)
     {
         var doesCountryExist = DoesCountryExist(shipperC1, receiverC2);
         if (doesCountryExist != null)
@@ -234,7 +251,7 @@ public class CustomsService : ICustomsService
                 Success = true,
             };
 
-        var resultShipper = CheckIfEUCU(shipperC1, shipperP1);
+        var resultShipper = CheckIfEUCU(shipperC1, shipperP1, shipperCity1);
         if (!resultShipper)
             return new CustomsResponse()
             {
@@ -242,7 +259,7 @@ public class CustomsService : ICustomsService
                 Success = true,
             };
 
-        var resultReceiver = CheckIfEUCU(receiverC2, receiverP2);
+        var resultReceiver = CheckIfEUCU(receiverC2, receiverP2, receiverCity2);
         if (!resultReceiver)
             return new CustomsResponse()
             {
