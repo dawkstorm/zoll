@@ -16,5 +16,11 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         builder
             .Property(c => c.A2Code)
             .HasMaxLength(2);
+
+        builder
+            .HasMany(e => e.PostalCodes)
+            .WithOne(e => e.Country)
+            .HasForeignKey(e => e.CountryID)
+            .HasPrincipalKey(e => e.Id);
     }
 }

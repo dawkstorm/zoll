@@ -28,11 +28,6 @@ public class CustomsContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
-
-        modelBuilder.Entity<Country>()
-            .HasMany(e => e.PostalCodes)
-            .WithOne(e => e.Country)
-            .HasForeignKey(e => e.CountryID)
-            .HasPrincipalKey(e => e.Id);
+        modelBuilder.ApplyConfiguration(new PostalCodeConfiguration());
     }
 }

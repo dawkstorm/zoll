@@ -6,7 +6,6 @@ using CustomsController.Model;
 /// </summary>
 public class PostalCode
 {
-
     /// <summary>
     /// Costructor
     /// </summary>
@@ -28,6 +27,11 @@ public class PostalCode
     /// Postal code 
     /// </summary>
     public string Code { get; set; }
+
+    /// <summary>
+    /// City
+    /// </summary>
+    public string City { get; set; }
 
     /// <summary>
     /// Type of the postal code: region or postal code
