@@ -86,7 +86,11 @@ public class CountryController : ControllerBase
     {
         return _customService.GetAllCountries();
     }
-
+    /// <summary>
+    /// Return country's information
+    /// </summary>
+    /// <param name="A2Code">Country's A2 Isocode</param>
+    /// <returns></returns>
     [HttpGet]
     [Route("get-country-information")]
     public async Task<IActionResult> GetCountryInformation(string A2Code)

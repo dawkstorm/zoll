@@ -1,16 +1,13 @@
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.Intrinsics.X86;
 using CustomsController.Model;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 
 namespace CustomsController.Services;
 
 /// <inheritdoc/>
 public class CustomsService : ICustomsService
 {
-    private readonly CustomsContext _customContext; // database itself
+    private readonly CustomsContext _customContext;
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -19,8 +16,6 @@ public class CustomsService : ICustomsService
     {
         _customContext = customsContext;
     }
-
-    public CustomsService() { }
 
     /// <inheritdoc/>
     public Country AddNewCountry(string A2Code, bool isEUCU)
@@ -68,17 +63,6 @@ public class CustomsService : ICustomsService
     /// <inheritdoc/>
     public string GetCountryEUCU(string A2Code)
     {
-
-        var countrytest = _customContext.Countries
-            .FirstOrDefault(c => c.A2Code == A2Code);
-        var countrytest2 = _customContext.Countries
-            .Include(c => c.PostalCodes)
-            .FirstOrDefault(c => c.A2Code == A2Code);
-
-
-
-
-
         var country = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
         if (country != default)
         {
@@ -100,12 +84,8 @@ public class CustomsService : ICustomsService
     /// <inheritdoc/>
     public CustomsResponse GetCustoms(string country1code, string country2code)
     {
-
-        var country1_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country1code);
-        var country2_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country2code);
-
-        // var country1_isEUCU = bool.Parse(GetCountryEUCU(country1code));
-        // var country2_isEUCU = bool.Parse(GetCountryEUCU(country2code));
+        var country1_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country1code).IsEUCU;
+        var country2_isEUCU = _customContext.Countries.FirstOrDefault(c => c.A2Code == country2code).IsEUCU;
 
         var doesCountryExist = DoesCountryExist(country1code, country2code);
         if (doesCountryExist != null)
@@ -113,14 +93,10 @@ public class CustomsService : ICustomsService
 
         var result2 = new CustomsResponse()
         {
-            IfCustomsInEUCU = false,
+            IfCustomsInEUCU = !(country1_isEUCU && country2_isEUCU),
             Success = true
         };
         return result2;
-
-
-        // if (country1_isEUCU && country2_isEUCU) return false;
-        // else return true;
     }
 
     private CustomsResponse DoesCountryExist(string country1code, string country2code)

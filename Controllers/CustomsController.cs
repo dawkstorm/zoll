@@ -37,10 +37,12 @@ public class CustomsController : ControllerBase
     /// <summary>
     /// Check whether there are customs between countries and postal codes
     /// </summary>
-    /// <param name="c1">First country's isocode</param>
-    /// <param name="p1">First postalCode</param>
-    /// <param name="c2">Second country's isocode</param>
-    /// <param name="p2">Second postalCode</param>
+    /// <param name="country1">Shipper country's isocode</param>
+    /// <param name="p1">Shipper postalCode</param>
+    /// <param name="country2">Receiver country's isocode</param>
+    /// <param name="p2">Receiver postalCode</param>
+    /// <param name="city1">Shipper's city</param>
+    /// <param name="city2">Receiver's city</param>
     [HttpGet]
     [Route("get-customs-with-zipcodes")]
     public async Task<CustomsResponse> GetCustomsWithZipcodes(

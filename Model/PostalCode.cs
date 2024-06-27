@@ -1,13 +1,12 @@
 using CustomsController.Model;
 
-
 /// <summary>
 /// Database model for postal codes
 /// </summary>
 public class PostalCode
 {
     /// <summary>
-    /// Costructor
+    /// Constructor
     /// </summary>
     /// <param name="Country">Country's A2 isocode</param>
     /// <param name="Code">Postal code</param>

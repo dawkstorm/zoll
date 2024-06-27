@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 /// </summary>
 public class CustomsContext : DbContext
 {
-    public CustomsContext(DbContextOptions<CustomsContext> options) : base(options)
-    {
+    public CustomsContext(DbContextOptions<CustomsContext> options) : base(options) { }
 
-    }
     /// <summary>
     /// Countries database
     /// </summary>
