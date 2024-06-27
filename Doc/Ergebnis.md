@@ -10,11 +10,7 @@
 - Neue Erfahrungen
 	- Prozesse in E-Commerce Unternehmen
 	- Agile/Scrum Teamarbeit 
-
---- 
-
-
-
+	
 ---
 
 ## Technische Verbesserungen
@@ -29,11 +25,10 @@
 
 ---
 
-
-- ![[Pasted image 20240626132822.png | 550]]
+![[Pasted image 20240627125832.png]]
 
 ---
- ![[Pasted image 20240626132442.png]]
+ ![[Pasted image 20240627125554.png]]
 --- 
 ## Mehr Zollbestimmung
 
@@ -45,9 +40,7 @@
 	- Verbindung zwischen Countries und Ausnahmen mit Foregin Key
 ---
 
-![[Pasted image 20240626131356.png]]
-
-
+![[Pasted image 20240627125646.png]]
 
 --- 
 
@@ -62,7 +55,7 @@
 
 --- 
 
-## Vielen Dank für Ihre Aufmerkskeit
+## Vielen Dank für Ihre Aufmerksamkeit
 
 --- 
 
