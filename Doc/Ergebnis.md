@@ -37,7 +37,7 @@
 	- Region - 39 XXX Grönland in Dänemark
 	- City - 23030 Livigno in Italien
 - Neues Databankstruktur
-	- Verbindung zwischen Countries und Ausnahmen mit Foregin Key
+	- Verbindung zwischen Countries und Ausnahmen mit Foreign Key
 ---
 
 ![[Pasted image 20240627125646.png]]
