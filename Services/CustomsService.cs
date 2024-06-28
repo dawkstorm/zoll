@@ -1,5 +1,4 @@
 using CustomsController.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace CustomsController.Services;
 

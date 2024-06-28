@@ -1,4 +1,5 @@
 namespace CustomsController.Model;
+
 /// <summary>
 /// Type of a special case
 /// </summary>
