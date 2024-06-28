@@ -15,7 +15,7 @@ public class CustomsContext : DbContext
     /// <summary>
     /// Postcodes database
     /// </summary>
-    public DbSet<PostalCode> PostalCodes => Set<PostalCode>();
+    public DbSet<SpecialCase> PostalCodes => Set<SpecialCase>();
 
     /// <summary>
     /// Path to the database
@@ -26,6 +26,6 @@ public class CustomsContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
-        modelBuilder.ApplyConfiguration(new PostalCodeConfiguration());
+        modelBuilder.ApplyConfiguration(new SpecialCaseConfiguration());
     }
 }

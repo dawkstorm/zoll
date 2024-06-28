@@ -1,6 +1,6 @@
 # Customs control check
 
-Customs control check for European countries, whether in EU or not. This project was done during my school internship at RelaxDays GmbH, it uses C# with RESTAPI and Entity Framework core. It's primary purpose to automate check on customs control between 2 postal codes in different countries.
+Customs control check for European Union Customs Union (EUCU). This project was done during my school internship at RelaxDays GmbH, it uses C# with REST-API and Entity Framework core. It's primary purpose to automate check on customs control between 2 postal codes in different countries.
 
 ## Key contributions
 
@@ -10,7 +10,7 @@ Customs control check for European countries, whether in EU or not. This project
 
 ## Technical stack
 
--   **Languages and frameworks:** C#, .NET Core, Entity Framework, WebAPI RESTAPI,
+-   **Languages and frameworks:** C#, .NET Core, Entity Framework, WebAPI REST-API
 -   **Tools:** VS Code, DBeaver, Obsidian (for presentations and other read.md)
 
 ## Challenges

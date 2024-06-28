@@ -27,11 +27,11 @@ public class CountryController : ControllerBase
     /// <param name="A2Code">Country's A2 Isocode</param>
     /// <param name="isEUCU">Is country a part of the EUCU</param>
     [HttpPost]
-    [Route("add-new-country")]
+    [Route("add-country")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> AddNewCountry(string A2Code, bool isEUCU)
+    public async Task<IActionResult> AddCountry(string A2Code, bool isEUCU)
     {
-        var country = _customService.AddNewCountry(A2Code, isEUCU);
+        var country = _customService.AddCountry(A2Code, isEUCU);
         if (country == default)
         {
             return Ok("Country is already in the database");
@@ -72,9 +72,13 @@ public class CountryController : ControllerBase
     /// <param name="A2Code">Country's A2 Isocode</param>
     [HttpGet]
     [Route("get-country-eucu")]
-    public async Task<string> GetCountryEUCU(string A2Code)
+    public async Task<IActionResult> GetCountryEUCU(string A2Code)
     {
-        return _customService.GetCountryEUCU(A2Code);
+        var result = _customService.GetCountryEUCU(A2Code);
+        if (result != null)
+            return Ok(result);
+        else
+            return NotFound("Country wasn't found in the database");
     }
 
     /// <summary>
@@ -86,6 +90,7 @@ public class CountryController : ControllerBase
     {
         return _customService.GetAllCountries();
     }
+
     /// <summary>
     /// Return country's information
     /// </summary>

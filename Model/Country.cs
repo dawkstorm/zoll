@@ -32,5 +32,5 @@ public class Country
     /// <summary>
     /// 
     /// </summary>
-    public ICollection<PostalCode> PostalCodes { get; set; }
+    public ICollection<SpecialCase> PostalCodes { get; set; }
 }

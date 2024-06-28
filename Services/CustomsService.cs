@@ -18,7 +18,7 @@ public class CustomsService : ICustomsService
     }
 
     /// <inheritdoc/>
-    public Country AddNewCountry(string A2Code, bool isEUCU)
+    public Country AddCountry(string A2Code, bool isEUCU)
     {
         var country = new Country(A2Code, isEUCU);
         var code = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
@@ -156,11 +156,11 @@ public class CustomsService : ICustomsService
         return true;
     }
 
-    private bool CityCheck(string pCode, string city, IQueryable<PostalCode> exceptionsForCountry)
+    private bool CityCheck(string pCode, string city, IQueryable<SpecialCase> exceptionsForCountry)
     {
         foreach (var exceptionForCountry in exceptionsForCountry)
         {
-            if (exceptionForCountry.Type == PostalCodeType.City
+            if (exceptionForCountry.Type == SpecialCaseType.City
             && exceptionForCountry.Code == pCode
             && exceptionForCountry.City == city)
             {
@@ -170,23 +170,23 @@ public class CustomsService : ICustomsService
         return true;
     }
 
-    private bool RegionCheck(string pCode, IQueryable<PostalCode> exceptionsForCountry)
+    private bool RegionCheck(string pCode, IQueryable<SpecialCase> exceptionsForCountry)
     {
         foreach (var exceptionForCountry in exceptionsForCountry)
         {
-            if (exceptionForCountry.Type == PostalCodeType.Region && pCode.StartsWith(exceptionForCountry.Code))
+            if (exceptionForCountry.Type == SpecialCaseType.Region && pCode.StartsWith(exceptionForCountry.Code))
                 return false;
         }
         return true;
     }
 
-    private bool ZipcodeCheck(string pCode, IQueryable<PostalCode> exceptionsForCountry)
+    private bool ZipcodeCheck(string pCode, IQueryable<SpecialCase> exceptionsForCountry)
     {
         // postleitzahl check
         // if (exceptionCodes.Contains(pCode) )
         //    return false; // customs ist true
         foreach (var exceptionForCountry in exceptionsForCountry)
-            if (exceptionForCountry.Code == pCode && exceptionForCountry.Type == PostalCodeType.Zipcode)
+            if (exceptionForCountry.Code == pCode && exceptionForCountry.Type == SpecialCaseType.Zipcode)
                 return false;
         return true;
     }

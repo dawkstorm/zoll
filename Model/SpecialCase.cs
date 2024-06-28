@@ -3,7 +3,7 @@ using CustomsController.Model;
 /// <summary>
 /// Database model for postal codes
 /// </summary>
-public class PostalCode
+public class SpecialCase
 {
     /// <summary>
     /// Constructor
@@ -11,7 +11,7 @@ public class PostalCode
     /// <param name="Country">Country's A2 isocode</param>
     /// <param name="Code">Postal code</param>
     /// <param name="Type">Type of the postal code: region or postal code</param>
-    public PostalCode(string Code, PostalCodeType Type)
+    public SpecialCase(string Code, SpecialCaseType Type)
     {
         this.Code = Code;
         this.Type = Type;
@@ -35,7 +35,7 @@ public class PostalCode
     /// <summary>
     /// Type of the postal code: region or postal code
     /// </summary>
-    public PostalCodeType Type { get; set; }
+    public SpecialCaseType Type { get; set; }
 
     /// <summary>
     /// Country's ID

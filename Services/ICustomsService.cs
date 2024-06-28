@@ -9,7 +9,7 @@ public interface ICustomsService
     /// </summary>
     /// <param name="A2Code">Country's A2 isocode</param>
     /// <param name="isEUCU">is counntry a part of EUCU</param>
-    public Country AddNewCountry(string A2Code, bool isEUCU);
+    public Country AddCountry(string A2Code, bool isEUCU);
 
     /// <summary>
     /// Remove country from the database
