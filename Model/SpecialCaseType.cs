@@ -16,7 +16,7 @@ public enum SpecialCaseType
     Region,
 
     /// <summary>
-    /// Special case is a cit  y
+    /// Special case is a city
     /// </summary>
     City
 }

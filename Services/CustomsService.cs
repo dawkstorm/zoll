@@ -19,12 +19,12 @@ public class CustomsService : ICustomsService
     /// <inheritdoc/>
     public Country AddCountry(string A2Code, bool isEUCU)
     {
-        var country = new Country(A2Code, isEUCU);
         var code = _customContext.Countries.FirstOrDefault(c => c.A2Code == A2Code);
         if (code != default)
         {
             return default;
         }
+        var country = new Country(A2Code, isEUCU);
         _customContext.Add(country);
         _customContext.SaveChanges();
         return country;
@@ -69,9 +69,8 @@ public class CustomsService : ICustomsService
         }
         else
         {
-            return "country is not in the database";
+            throw new Exception("country is not in the database");
         }
-
     }
 
     /// <inheritdoc/>

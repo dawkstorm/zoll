@@ -15,7 +15,7 @@
 
 ![[image.png | 400]]
 
-- Was sind gute "Regeln"
+- Was sind gute "Regeln"?
 
 ---
 

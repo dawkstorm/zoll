@@ -30,7 +30,7 @@ public class Country
     public bool IsEUCU { get; set; }
 
     /// <summary>
-    /// 
+    /// Special cases of the country
     /// </summary>
     public ICollection<SpecialCase> PostalCodes { get; set; }
 }
